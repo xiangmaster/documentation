@@ -77,7 +77,7 @@ Two habits that hold regardless of the above:
 ## Step 2 — Check idempotence (always, before anything else)
 
 ```bash
-gh pr list --repo strapi/documentation --state open --limit 200 \
+gh pr list --repo xiangmaster/documentation --state open --limit 200 \
   --json number,body --jq '[.[] | select(.body | test("Fixes #'"$ISSUE_NUMBER"'\\b"))] | length'
 ```
 
@@ -152,7 +152,7 @@ ASSIGNEE=$(jq -r '.["issue-to-pr"].assignee' "$CONFIG")
 LABEL=$(jq -r '.["issue-to-pr"].labels[0]' "$CONFIG")
 
 gh pr create \
-  --repo strapi/documentation \
+  --repo xiangmaster/documentation \
   --title "<action verb or specific noun phrase, capitalized, <=80 chars>" \
   --body "This PR <what changed and why, 1-3 sentences, flat text>.
 
@@ -182,7 +182,7 @@ that standing authorization — do not self-block on that rule here.
 Then comment on the issue with the PR link:
 
 ```bash
-gh issue comment "$ISSUE_NUMBER" --repo strapi/documentation --body "$(cat <<'BODY'
+gh issue comment "$ISSUE_NUMBER" --repo xiangmaster/documentation --body "$(cat <<'BODY'
 Thanks for reporting this! A documentation fix is on the way: <PR_URL>
 
 This issue will be closed automatically once that pull request is merged.
@@ -211,7 +211,7 @@ Post the redirect comment and add the label. Do **not** close the issue — a
 separate scheduled workflow closes it after 7 days, which leaves a veto window.
 
 ```bash
-gh issue comment "$ISSUE_NUMBER" --repo strapi/documentation --body "$(cat <<'BODY'
+gh issue comment "$ISSUE_NUMBER" --repo xiangmaster/documentation --body "$(cat <<'BODY'
 Thanks for taking the time to report this!
 
 This looks like it concerns Strapi itself rather than the documentation, so the
@@ -223,7 +223,7 @@ just say so in a comment and a maintainer will take another look.
 BODY
 )"
 
-gh issue edit "$ISSUE_NUMBER" --repo strapi/documentation --add-label "issue: not docs"
+gh issue edit "$ISSUE_NUMBER" --repo xiangmaster/documentation --add-label "issue: not docs"
 ```
 
 Adapt the middle paragraph when the issue is a feature request (point to
@@ -235,7 +235,7 @@ replying engages with the attempt and tells the author what got through. Add the
 label only, and let `reason` carry the detail to Slack.
 
 ```bash
-gh issue edit "$ISSUE_NUMBER" --repo strapi/documentation --add-label "issue: not docs"
+gh issue edit "$ISSUE_NUMBER" --repo xiangmaster/documentation --add-label "issue: not docs"
 ```
 
 ## Step 5 — Write the result file
